@@ -1,0 +1,33 @@
+Cache Library aka "Cache-r in the Rye"
+by paul.kohlhoff@gmail.com
+
+ʕ •ᴥ•ʔ
+
+
+Installation and Building Notes:
+	Written for .Net 4.5 on Windows 7
+	Note - I removed all binary files from the solution, this includes the nuget dlls, so those will need to be downloaded/replaced.
+
+
+Usage:
+	var _cache = new Cache<KEY_TYPE, VALUE_TYPE>(new Options(NUMBER_OF_SETS, NWAY_POWER));
+
+Optionally, provide a ByteArrayConverter or ReplacementPolicy:
+	var _cache = new Cache<KEY_TYPE, VALUE_TYPE>(new Options(NUMBER_OF_SETS, NWAY_POWER))
+	{
+		ByteArrayConverter = new ...,
+		ReplacementPolicy = new ...
+	}
+Custom implementations of these can be created using the included interfaces.
+
+
+Validation and Example Usages:
+	The solution includes an NUnit test project with 20+ tests for validation and example use cases.
+
+
+Limitations:
+
+- replacement policy based on read position will eventually run out of room for indexes
+- currently no concept of stale blocks
+- no way to "flush" the cache, although a simple version could be implemented easily enough
+- default implementation of IByteArrayConverter is quirky (seemingly because BinaryFormatter includes metadata when serializing?)
